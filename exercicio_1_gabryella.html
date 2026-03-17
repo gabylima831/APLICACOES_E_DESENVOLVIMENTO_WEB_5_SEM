@@ -1,0 +1,98 @@
+<!--
+Crie uma página html com um card que contenha os seguintes elementos: 
+uma imagem alinhada à esquerda ao lado da imagem uma área de texto com nome do usuário (em destaque), 
+uma breve descrição (parágrafo), quatro botões "seguir", "positivo", "negativo" e "mensagem".
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Card de Usuário</title>
+
+<style>
+
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+}
+
+.card{
+    width:450px;
+    background:white;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    padding:20px;
+    gap:20px;
+}
+
+.card img{
+    width:120px;
+    height:120px;
+    border-radius:10px;
+    object-fit:cover;
+}
+
+.info{
+    flex:1;
+}
+
+.nome{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.botoes{
+    margin-top:15px;
+    display: flex;
+    gap: 8px;
+}
+
+button{
+    padding:8px 12px;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+}
+
+.seguir{background:#007bff;color:white;}
+.positivo{background:#28a745;color:white;}
+.negativo{background:#dc3545;color:white;}
+.mensagem{background:#6c757d;color:white;}
+
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+<img src="https://picsum.photos/200">
+
+<div class="info">
+<div class="nome">Gabryella Lima Oliveira</div>
+
+<p>
+Desenvolvedora e entusiasta de tecnologia. 
+Apaixonada por redes, segurança e programação.
+</p>
+
+<div class="botoes">
+<button class="seguir">Seguir</button>
+<button class="positivo">Positivo</button>
+<button class="negativo">Negativo</button>
+<button class="mensagem">Mensagem</button>
+</div>
+
+</div>
+
+</div>
+
+</body>
+</html>

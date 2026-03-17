@@ -1,0 +1,85 @@
+<!--
+Crie uma página html com 5 cards de foto, com responsividade usando flexbox e grid.
+-->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Galeria de Fotos</title>
+
+<style>
+
+body{
+    font-family:Arial;
+    background:#f4f4f4;
+    padding:30px;
+}
+
+/* GRID RESPONSIVO */
+
+.galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+
+/* CARD */
+
+.card{
+    background:white;
+    border-radius:10px;
+    overflow:hidden;
+    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    display:flex;
+    flex-direction:column;
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.info{
+    padding:15px;
+    display:flex;
+    justify-content:center;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="galeria">
+
+<div class="card">
+<img src="https://picsum.photos/300?1">
+<div class="info">Foto 1</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?2">
+<div class="info">Foto 2</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?3">
+<div class="info">Foto 3</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?4">
+<div class="info">Foto 4</div>
+</div>
+
+<div class="card">
+<img src="https://picsum.photos/300?5">
+<div class="info">Foto 5</div>
+</div>
+
+</div>
+
+</body>
+</html>
