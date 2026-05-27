@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Gerenciamento de Usuários</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Gerenciamento de Usuários</h1>
+  </header>
+
+  <main>
+    <!-- Lista de usuários -->
+    <section>
+      <h2>Usuários cadastrados</h2>
+      <ul id="lista-usuarios"></ul>
+    </section>
+
+    <!-- Mensagens de feedback -->
+    <div id="mensagem" class="mensagem"></div>
+
+    <!-- Formulário POST -->
+    <section class="form">
+      <h2>Adicionar Usuário</h2>
+      <form id="form-inserir">
+        <input type="text" id="nome" placeholder="Nome" required>
+        <input type="text" id="curso" placeholder="Curso" required>
+        <button type="submit" class="btn btn-add">Inserir</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- Modal Atualizar -->
+  <div id="modal-atualizar" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-atualizar')">&times;</span>
+      <h2>Atualizar Usuário</h2>
+      <form id="form-atualizar">
+        <input type="hidden" id="id-atualizar">
+        <input type="text" id="nome-atualizar" placeholder="Novo Nome">
+        <input type="text" id="curso-atualizar" placeholder="Novo Curso">
+        <button type="submit" class="btn btn-update"> Atualizar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Deletar -->
+  <div id="modal-deletar" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="fecharModal('modal-deletar')">&times;</span>
+      <h2>Remover Usuário</h2>
+      <p>Tem certeza que deseja remover este usuário?</p>
+      <button id="confirmar-delete" class="btn btn-delete">Remover</button>
+    </div>
+  </div>
+
+  <script>
+    const mensagem = document.getElementById("mensagem");
+    let usuarioSelecionado = null;
+
+    function mostrarMensagem(texto, tipo="sucesso") {
+      mensagem.textContent = texto;
+      mensagem.className = "mensagem " + tipo;
+      setTimeout(() => mensagem.textContent = "", 3000);
+    }
+
+    function abrirModal(id) {
+      document.getElementById(id).style.display = "block";
+    }
+
+    function fecharModal(id) {
+      document.getElementById(id).style.display = "none";
+    }
+
+    async function listarUsuarios() {
+      const resposta = await fetch("/usuarios");
+      const dados = await resposta.json();
+      const lista = document.getElementById("lista-usuarios");
+      lista.innerHTML = "";
+      dados.forEach(u => {
+        const li = document.createElement("li");
+        li.textContent = `ID: ${u.id} | Nome: ${u.nome} | Curso: ${u.curso}`;
+        li.onclick = () => {
+          usuarioSelecionado = u;
+          document.getElementById("id-atualizar").value = u.id;
+          abrirModal("modal-atualizar");
+        };
+        li.oncontextmenu = (e) => {
+          e.preventDefault();
+          usuarioSelecionado = u;
+          abrirModal("modal-deletar");
+        };
+        lista.appendChild(li);
+      });
+    }
+
+    document.getElementById("form-inserir").addEventListener("submit", async e => {
+      e.preventDefault();
+      const nome = document.getElementById("nome").value;
+      const curso = document.getElementById("curso").value;
+      const resp = await fetch("/inserir", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({nome, curso})
+      });
+      if (resp.ok) {
+        mostrarMensagem("Usuário inserido com sucesso!");
+        listarUsuarios();
+      } else {
+        mostrarMensagem("Erro ao inserir usuário", "erro");
+      }
+    });
+
+    document.getElementById("form-atualizar").addEventListener("submit", async e => {
+      e.preventDefault();
+      const id = document.getElementById("id-atualizar").value;
+      const nome = document.getElementById("nome-atualizar").value;
+      const curso = document.getElementById("curso-atualizar").value;
+      const resp = await fetch(`/atualizar/${id}`, {
+        method: "PUT",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({nome, curso})
+      });
+      if (resp.ok) {
+        mostrarMensagem("Usuário atualizado com sucesso!");
+        fecharModal("modal-atualizar");
+        listarUsuarios();
+      } else {
+        mostrarMensagem("Erro ao atualizar usuário", "erro");
+      }
+    });
+
+    document.getElementById("confirmar-delete").addEventListener("click", async () => {
+      const resp = await fetch(`/deletar/${usuarioSelecionado.id}`, { method: "DELETE" });
+      if (resp.ok) {
+        mostrarMensagem("Usuário removido com sucesso!");
+        fecharModal("modal-deletar");
+        listarUsuarios();
+      } else {
+        mostrarMensagem("Erro ao remover usuário", "erro");
+      }
+    });
+
+    listarUsuarios();
+  </script>
+</body>
+</html>

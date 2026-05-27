@@ -1,0 +1,167 @@
+/* Estilo global */
+body {
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(135deg, #f0f4f8, #e6ebf0);
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Cabeçalho */
+header {
+  background: #4a90e2;
+  color: #fff;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+/* Conteúdo principal */
+main {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+}
+
+/* Títulos */
+h2 {
+  margin-top: 2rem;
+  color: #2c3e50;
+  border-left: 4px solid #4a90e2;
+  padding-left: 0.5rem;
+}
+
+/* Formulários */
+.form {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.form:hover {
+  transform: translateY(-3px);
+}
+
+/* Inputs e botões */
+input, button {
+  padding: 0.7rem;
+  margin: 0.4rem 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+input:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74,144,226,0.5);
+}
+
+button {
+  background: #4a90e2;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+button:hover {
+  background: #357ab8;
+}
+
+/* Lista de usuários */
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  background: #fff;
+  margin: 0.4rem 0;
+  padding: 0.7rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: background 0.2s ease;
+}
+
+li:hover {
+  background: #f0f8ff;
+}
+
+.mensagem {
+  margin: 1rem 0;
+  padding: 0.8rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.mensagem.sucesso {
+  background: #d4edda;
+  color: #155724;
+}
+
+.mensagem.erro {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.btn {
+  font-size: 1rem;
+  padding: 0.7rem;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-add { background: #28a745; color: #fff; }
+.btn-add:hover { background: #218838; }
+
+.btn-update { background: #007bff; color: #fff; }
+.btn-update:hover { background: #0056b3; }
+
+.btn-delete { background: #dc3545; color: #fff; }
+.btn-delete:hover { background: #c82333; }
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+  background: #fff;
+  margin: 10% auto;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 400px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.close {
+  float: right;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.close:hover {
+  color: red;
+}
